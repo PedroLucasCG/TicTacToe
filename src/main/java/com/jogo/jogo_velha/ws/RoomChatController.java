@@ -20,9 +20,8 @@ public class RoomChatController {
 
     @MessageMapping("/sala/{roomId}")
     public void sendMessage(@DestinationVariable String roomId, ReceivePlays plays) {
-        messagingTemplate.convertAndSend("/topic/" + roomId, plays);
         int jogoId = sessionRepository.getFirstIdBySala(roomId);
-        updateJogo(plays, jogoId);
+        messagingTemplate.convertAndSend("/topic/" + roomId, updateJogo(plays, jogoId));
     }
 
     public SendPlays updateJogo(ReceivePlays receivePlays, int id) {
