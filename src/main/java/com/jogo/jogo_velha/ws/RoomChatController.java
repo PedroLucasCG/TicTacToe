@@ -25,12 +25,12 @@ public class RoomChatController {
         updateJogo(plays, jogoId);
     }
 
-    public void updateJogo(ReceivePlays receivePlays, int id) {
+    public SendPlays updateJogo(ReceivePlays receivePlays, int id) {
         JogoModel jogoModel = jogoRepository.getReferenceById(id);
         String[] tabuleiro = jogoModel.getTabuleiro().split(",");
         boolean resultPlay = TicTacToe.hasGameEnded(tabuleiro);
         if (!tabuleiro[receivePlays.getPosition()].equals(" ")) {
-            return;
+            return new SendPlays(tabuleiro, "JOGADA INVÁLIDA");
         }
         tabuleiro[receivePlays.getPosition()] = receivePlays.getType();
         jogoModel.setTabuleiro(String.join(",", tabuleiro));
@@ -40,5 +40,6 @@ public class RoomChatController {
             System.out.println("Jogo " + jogoModel.getId() + " has ended");
         }
         jogoRepository.save(jogoModel);
+        return new SendPlays(tabuleiro, resultPlay ? "Acabou" : "Em andamento");
     }
 }
