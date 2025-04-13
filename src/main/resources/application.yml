@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: jogo_velha
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/jogo_velha
+    username: root
+    password: "pedro"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Caso queira usar o H2, comente o bloco acima e descomente abaixo:
+    # url: jdbc:h2:mem:testdb
+    # username: sa
+    # password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+
+springdoc:
+  swagger-ui:
+    path: /public/swagger

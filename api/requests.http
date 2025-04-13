@@ -1,0 +1,16 @@
+POST http://localhost:8080/jogador/
+Content-Type: application/json
+
+{
+    "nome": "pedro"
+}
+
+###
+
+POST http://localhost:8080/session/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jogadorId": 1
+}
